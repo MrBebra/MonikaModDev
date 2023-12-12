@@ -2995,37 +2995,78 @@ label greeting_back_from_school:
         m 1hua "Oh, welcome back, [mas_get_player_nickname()]!"
         m 1eua "How was your day at school?{nw}"
         $ _history_list.pop()
-        menu:
-            m "How was your day at school?{fast}"
 
-            "Amazing.":
-                m 2sub "Really?!"
-                m 2hub "That's wonderful to hear, [player]!"
-                if renpy.random.randint(1,4) == 1:
-                    m 3eka "School can definitely be a large part of your life, and you might miss it later on."
-                    m 2hksdlb "Ahaha! I know it might be weird to think that you'll miss having to go to school someday..."
-                    m 2eub "But a lot of fond memories come from school!"
-                    m 3hua "Maybe you could tell me about them sometime."
-                else:
-                    m 3hua "It always makes me happy to know you're happy~"
-                    m 1eua "If you want to talk about your amazing day, I'd love to hear about it!"
-                return
+        
+        if datetime.datetime.now() > datetime.time(hours = 9) and datetime.datetime.now() < datetime.time(hours = 15):
+            #this is braindead
+            #there must be another way to do this
+            menu:
+                m "How was your day at school?{fast}"
 
-            "Good.":
-                m 1hub "That's great...{w=0.3}{nw}"
-                extend 3eub "I can't help but feel happy when you come home in a good mood!"
-                m 3hua "I hope you learned something useful, ehehe~"
-                return
+                "Amazing.":
+                    m 2sub "Really?!"
+                    m 2hub "That's wonderful to hear, [player]!"
+                    if renpy.random.randint(1,4) == 1:
+                        m 3eka "School can definitely be a large part of your life, and you might miss it later on."
+                        m 2hksdlb "Ahaha! I know it might be weird to think that you'll miss having to go to school someday..."
+                        m 2eub "But a lot of fond memories come from school!"
+                        m 3hua "Maybe you could tell me about them sometime."
+                    else:
+                        m 3hua "It always makes me happy to know you're happy~"
+                        m 1eua "If you want to talk about your amazing day, I'd love to hear about it!"
+                    return
 
-            "Bad.":
-                m 1ekc "Oh..."
-                m 1dkc "I'm sorry to hear that."
-                m 1ekd "Bad days at school can be really demoralizing..."
+                "Good.":
+                    m 1hub "That's great...{w=0.3}{nw}"
+                    extend 3eub "I can't help but feel happy when you come home in a good mood!"
+                    m 3hua "I hope you learned something useful, ehehe~"
+                    return
 
-            "Really bad...":
-                m 1ekc "Oh..."
-                m 2ekd "I'm really sorry you had such a bad day today..."
-                m 2eka "I'm just glad you came to me, [player]."
+                "Bad.":
+                    m 1ekc "Oh..."
+                    m 1dkc "I'm sorry to hear that."
+                    m 1ekd "Bad days at school can be really demoralizing..."
+
+                "Really bad...":
+                    m 1ekc "Oh..."
+                    m 2ekd "I'm really sorry you had such a bad day today..."
+                    m 2eka "I'm just glad you came to me, [player]."
+                
+                "I'm on a Lunch Break.":
+                    #TODO
+
+        else:
+            menu:
+                m "How was your day at school?{fast}"
+
+                "Amazing.":
+                    m 2sub "Really?!"
+                    m 2hub "That's wonderful to hear, [player]!"
+                    if renpy.random.randint(1,4) == 1:
+                        m 3eka "School can definitely be a large part of your life, and you might miss it later on."
+                        m 2hksdlb "Ahaha! I know it might be weird to think that you'll miss having to go to school someday..."
+                        m 2eub "But a lot of fond memories come from school!"
+                        m 3hua "Maybe you could tell me about them sometime."
+                    else:
+                        m 3hua "It always makes me happy to know you're happy~"
+                        m 1eua "If you want to talk about your amazing day, I'd love to hear about it!"
+                    return
+
+                "Good.":
+                    m 1hub "That's great...{w=0.3}{nw}"
+                    extend 3eub "I can't help but feel happy when you come home in a good mood!"
+                    m 3hua "I hope you learned something useful, ehehe~"
+                    return
+
+                "Bad.":
+                    m 1ekc "Oh..."
+                    m 1dkc "I'm sorry to hear that."
+                    m 1ekd "Bad days at school can be really demoralizing..."
+
+                "Really bad...":
+                    m 1ekc "Oh..."
+                    m 2ekd "I'm really sorry you had such a bad day today..."
+                    m 2eka "I'm just glad you came to me, [player]."
 
         #Since this menu is too long, we'll use a gen-scrollable instead
         python:
@@ -3036,6 +3077,7 @@ label greeting_back_from_school:
                 ("It was just a bad day.", ".bad_day", False, False),
                 ("I felt sick today.", ".sick", False, False),
             ]
+
 
         show monika 2ekc at t21
         window show
